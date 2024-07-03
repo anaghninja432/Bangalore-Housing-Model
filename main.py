@@ -6,8 +6,8 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the model
-data=pd.read_csv('E:\CODES\Scripts\Cleaned_data.csv')
-model = pickle.load(open('E:\CODES\Scripts\RidgeModel.pkl', 'rb'))
+data=pd.read_csv('E:\CODES\Scripts\Bangalore-Housing-Model\Cleaned_data.csv')
+model = pickle.load(open('E:\CODES\Scripts\Bangalore-Housing-Model\RidgeModel.pkl', 'rb'))
 locations=sorted(data['location'].unique())
 
 @app.route('/')

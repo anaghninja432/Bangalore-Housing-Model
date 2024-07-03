@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .result,
+        .error {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .result {
+            background-color: #e0ffe0;
+            border: 1px solid #28a745;
+        }
+
+        .error {
+            background-color: #ffe0e0;
+            border: 1px solid #ff0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Price Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="location">Location:</label>
+            <select id="location" name="location" required>
+                {% for location in locations %}
+                <option value="{{ location }}">{{ location }}</option>
+                {% endfor %}
+            </select>
+            <label for="bhk">BHK:</label>
+            <input type="number" id="bhk" name="bhk" required>
+            <label for="bath">Bath:</label>
+            <input type="number" id="bath" name="bath" required>
+            <label for="sqft">Square Feet:</label>
+            <input type="number" id="sqft" name="sqft" required>
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+        <div class="result">
+            <h2>{{ prediction_text }}</h2>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="error">
+            <h2>Error: {{ error }}</h2>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
